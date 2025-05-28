@@ -1012,6 +1012,230 @@
                 margin-right: 12px;
             }
         }
+
+           /* Fullscreen Player */
+        .fullscreen-player {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, #121212 0%, #000000 100%);
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all var(--transition-medium);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .fullscreen-player.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .fullscreen-close {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 10;
+            transition: all var(--transition-fast);
+        }
+
+        .fullscreen-close:hover {
+            color: var(--primary-color);
+            transform: scale(1.1);
+        }
+
+        .fullscreen-cover-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin: 0 auto 40px;
+            perspective: 1000px;
+        }
+
+        .fullscreen-cover {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            object-fit: cover;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            transform-style: preserve-3d;
+            transition: transform var(--transition-medium);
+        }
+
+        .fullscreen-cover.playing {
+            animation: rotateCover 20s linear infinite;
+        }
+
+      
+
+        .fullscreen-info {
+            margin-bottom: 40px;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .fullscreen-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .fullscreen-artist {
+            font-size: 18px;
+            color: var(--text-secondary);
+        }
+
+        .fullscreen-progress-container {
+            width: 100%;
+            max-width: 400px;
+            margin-bottom: 30px;
+        }
+
+        .fullscreen-progress-bar {
+            width: 100%;
+            height: 4px;
+            background-color: #535353;
+            border-radius: 2px;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+
+        .fullscreen-progress {
+            height: 100%;
+            background-color: var(--primary-color);
+            border-radius: 2px;
+            width: 0%;
+            position: relative;
+            transition: width 0.1s linear;
+        }
+
+        .fullscreen-time {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .fullscreen-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .fullscreen-control-btn {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 24px;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .fullscreen-control-btn:hover {
+            color: var(--primary-color);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .fullscreen-control-btn.play-pause {
+            background-color: var(--primary-color);
+            color: #000;
+            width: 70px;
+            height: 70px;
+            font-size: 30px;
+        }
+
+        .fullscreen-control-btn.play-pause:hover {
+            background-color: var(--primary-light);
+            transform: scale(1.05);
+        }
+
+        .fullscreen-control-btn.active {
+            color: var(--primary-color);
+        }
+
+        /* Swipe animation */
+        .fullscreen-cover-container.swipe-left {
+            animation: swipeLeft 0.5s ease-out;
+        }
+
+        .fullscreen-cover-container.swipe-right {
+            animation: swipeRight 0.5s ease-out;
+        }
+
+        @keyframes swipeLeft {
+            0% { transform: translateX(0) scale(1); opacity: 1; }
+            50% { transform: translateX(-100%) scale(0.8); opacity: 0; }
+            51% { transform: translateX(100%) scale(0.8); opacity: 0; }
+            100% { transform: translateX(0) scale(1); opacity: 1; }
+        }
+
+        @keyframes swipeRight {
+            0% { transform: translateX(0) scale(1); opacity: 1; }
+            50% { transform: translateX(100%) scale(0.8); opacity: 0; }
+            51% { transform: translateX(-100%) scale(0.8); opacity: 0; }
+            100% { transform: translateX(0) scale(1); opacity: 1; }
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .fullscreen-cover-container {
+                width: 300px;
+                height: 300px;
+                margin-bottom: 30px;
+            }
+
+            .fullscreen-title {
+                font-size: 20px;
+            }
+
+            .fullscreen-artist {
+                font-size: 16px;
+            }
+
+            .fullscreen-controls {
+                gap: 20px;
+            }
+
+            .fullscreen-control-btn {
+                font-size: 20px;
+                width: 45px;
+                height: 45px;
+            }
+
+            .fullscreen-control-btn.play-pause {
+                width: 60px;
+                height: 60px;
+                font-size: 26px;
+            }
+
+            .fullscreen-close {
+                top: 20px;
+                right: 20px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1135,7 +1359,48 @@
             </div>
         </div>
     </div>
-
+ <div class="fullscreen-player" id="fullscreen-player">
+        <button class="fullscreen-close" id="fullscreen-close">
+            <i class="fas fa-times"></i>
+        </button>
+        
+        <div class="fullscreen-cover-container" id="fullscreen-cover-container">
+            <img src="a.png" alt="Album Cover" class="fullscreen-cover" id="fullscreen-cover">
+        </div>
+        
+        <div class="fullscreen-info">
+            <div class="fullscreen-title" id="fullscreen-title">Not Playing</div>
+            <div class="fullscreen-artist" id="fullscreen-artist">Select a song to play</div>
+        </div>
+        
+        <div class="fullscreen-progress-container">
+            <div class="fullscreen-progress-bar" id="fullscreen-progress-bar">
+                <div class="fullscreen-progress" id="fullscreen-progress"></div>
+            </div>
+            <div class="fullscreen-time">
+                <span id="fullscreen-current-time">0:00</span>
+                <span id="fullscreen-duration">0:00</span>
+            </div>
+        </div>
+        
+        <div class="fullscreen-controls">
+            <button class="fullscreen-control-btn" id="fullscreen-shuffle-btn" title="Shuffle">
+                <i class="fas fa-random"></i>
+            </button>
+            <button class="fullscreen-control-btn" id="fullscreen-prev-btn" title="Previous">
+                <i class="fas fa-step-backward"></i>
+            </button>
+            <button class="fullscreen-control-btn play-pause" id="fullscreen-play-pause-btn" title="Play/Pause">
+                <i class="fas fa-play" id="fullscreen-play-pause-icon"></i>
+            </button>
+            <button class="fullscreen-control-btn" id="fullscreen-next-btn" title="Next">
+                <i class="fas fa-step-forward"></i>
+            </button>
+            <button class="fullscreen-control-btn" id="fullscreen-repeat-btn" title="Repeat">
+                <i class="fas fa-redo"></i>
+            </button>
+        </div>
+    </div>
     <audio id="audio-player"></audio>
 
     <script>
@@ -1150,7 +1415,7 @@
                 duration: "3:20",
                 durationSec: 200,
                 cover: "https://i1.sndcdn.com/artworks-I1VkGxl2ilhQzbZY-9VobTQ-t500x500.jpg",
-                audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+                audio: "millionare.mp3",
                 liked: false
             },
             
@@ -1163,7 +1428,7 @@
                 duration: "3:35",
                 durationSec: 215,
                 cover: "https://i.ytimg.com/vi/c-FKlE3_kHo/maxresdefault.jpg",
-                audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+                audio: "qatal.mp3",
                 liked: false
             },
             {
@@ -1175,7 +1440,7 @@
                 duration: "3:50",
                 durationSec: 230,
                 cover: "https://i.ytimg.com/vi/Q0xFN10WJGc/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDvU-Ztb-ZdHf5RmKjoMYpOYbm8XA",
-                audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
+                audio: "janeman.mp3",
                 liked: false
             },
             {
@@ -1186,8 +1451,8 @@
                 dateAdded: "Mar 27, 2020",
                 duration: "3:23",
                 durationSec: 203,
-                cover: "ages.png",
-                audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3",
+                cover: "https://lyricskikitab.com/wp-content/uploads/2025/03/FROM-AGES-Lyrics.jpg",
+                audio: "ages.mp3",
                 liked: false
             },
             {
@@ -1199,7 +1464,7 @@
                 duration: "3:03",
                 durationSec: 183,
                 cover: "https://i.ytimg.com/vi/OCz1sADowRI/maxresdefault.jpg",
-                audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3",
+                audio: "jattmakma.mp3",
                 liked: false
             },
             {
@@ -1211,7 +1476,7 @@
                 duration: "2:54",
                 durationSec: 174,
                 cover: "https://lyricloops.com/wp-content/uploads/2024/09/Bonita-Lyrics-Yo-Yo-Honey-Singh-600x338.jpg",
-                audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3",
+                audio: "bonita.mp3",
                 liked: false
             },
             {
@@ -1219,25 +1484,50 @@
                 title: "KNOCK KNOCK",
                 artist: "KR$NA",
                 album: "_______",
-                dateAdded: "Aug 30, 2019",
+                dateAdded: "may 25, 2025",
                 duration: "3:35",
                 durationSec: 215,
                 cover: "https://i.ytimg.com/vi/02OPySK0jsA/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAH31bznr9tzcN9HDJ1KxIGUFwKtg",
-                audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3",
+                audio: "knockknock.mp3",
                 liked: false
             },
             {
                 id: 8,
-                title: "Sunflower",
-                artist: "Post Malone, Swae Lee",
-                album: "Spider-Man: Into the Spider-Verse",
-                dateAdded: "Oct 18, 2018",
+                title: "Karisma",
+                artist: "Guru Randhawa",
+                album: "Promotional song",
+                dateAdded: "Oct 18, 2025",
                 duration: "2:38",
                 durationSec: 158,
-                cover: "https://upload.wikimedia.org/wikipedia/en/4/4b/Post_Malone_%26_Swae_Lee_-_Sunflower.png",
-                audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3",
+                cover: "https://i.ytimg.com/vi/bhyx0FEiF9E/maxresdefault.jpg",
+                audio: "karima.mp3",
+                liked: false
+            },
+              {
+                id: 9,
+                title: "Supreme ",
+                artist: "Shubh",
+                album: "Supreme ",
+                dateAdded: "  Apr 18, 2025",
+                duration: "2:38",
+                durationSec: 158,
+                cover: "https://i1.sndcdn.com/artworks-0ikoyYFy9fgty6hy-HUwjFw-t500x500.jpg",
+                audio: "subh.mp3",
+                liked: false
+            },
+              {
+                id: 10,
+                title: "Havana",
+                artist: "Leo X Paradox",
+                album: "Leonization",
+                dateAdded: "Apr 25, 202",
+                duration: "2:38",
+                durationSec: 158,
+                cover: "https://i.ytimg.com/vi/R38XiYFc13s/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBkahcTXUMYD-2l1-z6--YeSRqfxw",
+                audio: "leoparadox.mp3",
                 liked: false
             }
+              
         ];
 
         // Load favorites from localStorage
@@ -1867,5 +2157,271 @@
         // Initialize
         init();
     </script>
+    <script>
+        // Previous JavaScript remains the same until the end
+        // Add these new variables at the top with other DOM elements
+        const fullscreenPlayer = document.getElementById('fullscreen-player');
+        const fullscreenClose = document.getElementById('fullscreen-close');
+        const fullscreenCover = document.getElementById('fullscreen-cover');
+        const fullscreenCoverContainer = document.getElementById('fullscreen-cover-container');
+        const fullscreenTitle = document.getElementById('fullscreen-title');
+        const fullscreenArtist = document.getElementById('fullscreen-artist');
+        const fullscreenProgressBar = document.getElementById('fullscreen-progress-bar');
+        const fullscreenProgress = document.getElementById('fullscreen-progress');
+        const fullscreenCurrentTime = document.getElementById('fullscreen-current-time');
+        const fullscreenDuration = document.getElementById('fullscreen-duration');
+        const fullscreenPlayPauseBtn = document.getElementById('fullscreen-play-pause-btn');
+        const fullscreenPlayPauseIcon = document.getElementById('fullscreen-play-pause-icon');
+        const fullscreenPrevBtn = document.getElementById('fullscreen-prev-btn');
+        const fullscreenNextBtn = document.getElementById('fullscreen-next-btn');
+        const fullscreenShuffleBtn = document.getElementById('fullscreen-shuffle-btn');
+        const fullscreenRepeatBtn = document.getElementById('fullscreen-repeat-btn');
+
+        // Add these new variables with other player state variables
+        let touchStartX = 0;
+        let touchEndX = 0;
+        let isFullscreen = false;
+
+        // Add this function to update the fullscreen player
+        function updateFullscreenPlayer() {
+            if (currentSongIndex >= 0 && currentSongIndex < songs.length) {
+                const song = songs[currentSongIndex];
+                
+                fullscreenCover.src = song.cover || 'a.png';
+                fullscreenTitle.textContent = song.title;
+                fullscreenArtist.textContent = song.artist;
+                fullscreenDuration.textContent = song.duration;
+                
+                if (isPlaying) {
+                    fullscreenCover.classList.add('playing');
+                    fullscreenPlayPauseIcon.className = 'fas fa-pause';
+                } else {
+                    fullscreenCover.classList.remove('playing');
+                    fullscreenPlayPauseIcon.className = 'fas fa-play';
+                }
+                
+                // Update active states
+                fullscreenShuffleBtn.classList.toggle('active', isShuffleOn);
+                fullscreenRepeatBtn.classList.toggle('active', isRepeatOn);
+            }
+        }
+
+        // Add this function to update fullscreen progress
+        function updateFullscreenProgress() {
+            if (!isScrubbing) {
+                const { currentTime, duration } = audioPlayer;
+                const progressPercent = (currentTime / duration) * 100 || 0;
+                fullscreenProgress.style.width = `${progressPercent}%`;
+                fullscreenCurrentTime.textContent = formatTime(currentTime);
+                
+                if (!isNaN(duration)) {
+                    fullscreenDuration.textContent = formatTime(duration);
+                }
+            }
+        }
+
+        // Add this function to toggle fullscreen player
+        function toggleFullscreenPlayer() {
+            if (audioPlayer.src) {
+                isFullscreen = !isFullscreen;
+                
+                if (isFullscreen) {
+                    updateFullscreenPlayer();
+                    fullscreenPlayer.classList.add('show');
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    fullscreenPlayer.classList.remove('show');
+                    document.body.style.overflow = '';
+                }
+            }
+        }
+
+        // Add this function to handle swipe gestures
+        function handleSwipe() {
+            const difference = touchStartX - touchEndX;
+            
+            // Minimum swipe distance (20% of screen width)
+            const minSwipeDistance = window.innerWidth * 0.2;
+            
+            if (difference > minSwipeDistance) {
+                // Swipe left - next song
+                fullscreenCoverContainer.classList.add('swipe-left');
+                setTimeout(() => {
+                    playNextSong();
+                    fullscreenCoverContainer.classList.remove('swipe-left');
+                }, 500);
+            } else if (difference < -minSwipeDistance) {
+                // Swipe right - previous song
+                fullscreenCoverContainer.classList.add('swipe-right');
+                setTimeout(() => {
+                    playPrevSong();
+                    fullscreenCoverContainer.classList.remove('swipe-right');
+                }, 500);
+            }
+        }
+
+        // Modify the playSong function to update fullscreen player
+        function playSong(index) {
+            if (index >= 0 && index < songs.length) {
+                currentSongIndex = index;
+                const song = songs[index];
+                
+                // Show loading state
+                nowPlayingCover.classList.remove('playing');
+                nowPlayingCover.style.opacity = '0.5';
+                fullscreenCover.style.opacity = '0.5';
+                
+                audioPlayer.src = song.audio;
+                audioPlayer.play()
+                    .then(() => {
+                        isPlaying = true;
+                        playPauseIcon.className = 'fas fa-pause';
+                        fullscreenPlayPauseIcon.className = 'fas fa-pause';
+                        
+                        nowPlayingCover.src = song.cover || 'a.png';
+                        nowPlayingCover.style.opacity = '1';
+                        nowPlayingCover.classList.add('playing');
+                        nowPlayingTitle.textContent = song.title;
+                        nowPlayingArtist.textContent = song.artist;
+                        durationEl.textContent = song.duration;
+                        
+                        // Update fullscreen player
+                        fullscreenCover.src = song.cover || 'a.png';
+                        fullscreenTitle.textContent = song.title;
+                        fullscreenArtist.textContent = song.artist;
+                        fullscreenDuration.textContent = song.duration;
+                        fullscreenCover.style.opacity = '1';
+                        fullscreenCover.classList.add('playing');
+                        
+                        // Update channel art
+                        channelArt.style.backgroundImage = `url('${song.cover || 'a.png'}')`;
+                        
+                        // Highlight the currently playing song
+                        const rows = document.querySelectorAll('.song-row');
+                        rows.forEach(row => row.classList.remove('playing'));
+                        rows[index].classList.add('playing');
+                        
+                        // Scroll to the playing song if it's not visible
+                        rows[index].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    })
+                    .catch(error => {
+                        console.error('Error playing song:', error);
+                        showToast('Error playing song');
+                    });
+            }
+        }
+
+        // Modify the togglePlayPause function to update fullscreen player
+        function togglePlayPause() {
+            if (audioPlayer.src) {
+                if (isPlaying) {
+                    audioPlayer.pause();
+                    playPauseIcon.className = 'fas fa-play';
+                    fullscreenPlayPauseIcon.className = 'fas fa-play';
+                    nowPlayingCover.classList.remove('playing');
+                    fullscreenCover.classList.remove('playing');
+                } else {
+                    audioPlayer.play();
+                    playPauseIcon.className = 'fas fa-pause';
+                    fullscreenPlayPauseIcon.className = 'fas fa-pause';
+                    nowPlayingCover.classList.add('playing');
+                    fullscreenCover.classList.add('playing');
+                }
+                isPlaying = !isPlaying;
+            } else if (songs.length > 0) {
+                // If no song is selected, play the first one
+                playSong(0);
+            }
+        }
+
+        // Add these new event listeners at the end of the script
+        nowPlayingCover.addEventListener('click', toggleFullscreenPlayer);
+        nowPlayingTitle.addEventListener('click', toggleFullscreenPlayer);
+        nowPlayingArtist.addEventListener('click', toggleFullscreenPlayer);
+        fullscreenClose.addEventListener('click', toggleFullscreenPlayer);
+        
+        fullscreenPlayPauseBtn.addEventListener('click', togglePlayPause);
+        fullscreenPrevBtn.addEventListener('click', playPrevSong);
+        fullscreenNextBtn.addEventListener('click', playNextSong);
+        fullscreenShuffleBtn.addEventListener('click', toggleShuffle);
+        fullscreenRepeatBtn.addEventListener('click', toggleRepeat);
+        
+        fullscreenProgressBar.addEventListener('click', (e) => {
+            const width = fullscreenProgressBar.clientWidth;
+            const clickX = e.offsetX;
+            const duration = audioPlayer.duration;
+            audioPlayer.currentTime = (clickX / width) * duration;
+        });
+        
+        // Touch events for swipe gestures
+        fullscreenCoverContainer.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+        
+        fullscreenCoverContainer.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, { passive: true });
+        
+        // Mouse events for desktop swipe simulation
+        fullscreenCoverContainer.addEventListener('mousedown', (e) => {
+            touchStartX = e.clientX;
+            document.addEventListener('mousemove', handleMouseMove);
+            document.addEventListener('mouseup', handleMouseUp);
+        });
+        
+        function handleMouseMove(e) {
+            touchEndX = e.clientX;
+        }
+        
+        function handleMouseUp() {
+            handleSwipe();
+            document.removeEventListener('mousemove', handleMouseMove);
+            document.removeEventListener('mouseup', handleMouseUp);
+        }
+        
+        // Update fullscreen progress when time updates
+        audioPlayer.addEventListener('timeupdate', () => {
+            updateProgress();
+            updateFullscreenProgress();
+        });
+        
+        // Update fullscreen player when play/pause state changes
+        audioPlayer.addEventListener('play', () => {
+            isPlaying = true;
+            playPauseIcon.className = 'fas fa-pause';
+            fullscreenPlayPauseIcon.className = 'fas fa-pause';
+            nowPlayingCover.classList.add('playing');
+            fullscreenCover.classList.add('playing');
+            updateFullscreenPlayer();
+        });
+        
+        audioPlayer.addEventListener('pause', () => {
+            isPlaying = false;
+            playPauseIcon.className = 'fas fa-play';
+            fullscreenPlayPauseIcon.className = 'fas fa-play';
+            nowPlayingCover.classList.remove('playing');
+            fullscreenCover.classList.remove('playing');
+            updateFullscreenPlayer();
+        });
+        
+        // Update fullscreen player when song ends
+        audioPlayer.addEventListener('ended', () => {
+            if (isRepeatOn) {
+                audioPlayer.currentTime = 0;
+                audioPlayer.play();
+            } else {
+                playNextSong();
+            }
+        });
+        
+        // Close fullscreen player with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && isFullscreen) {
+                toggleFullscreenPlayer();
+            }
+        });
+    </script>
 </body>
 </html>
+
