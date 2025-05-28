@@ -802,194 +802,216 @@
             to { transform: rotate(360deg); }
         }
 
-
-
-
-
         /* Favorites Button */
-    .favorites-btn {
-        background: none;
-        border: none;
-        color: var(--text-primary);
-        font-size: 20px;
-        cursor: pointer;
-        margin-left: 15px;
-        transition: all var(--transition-fast);
-        width: 40px;
-        height: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 50%;
-    }
-
-    .favorites-btn:hover {
-        color: #ff4d4d;
-        background-color: rgba(255, 77, 77, 0.1);
-        transform: scale(1.1);
-    }
-
-    /* Favorites Modal */
-    .favorites-modal {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: rgba(0, 0, 0, 0.8);
-        z-index: 1000;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        opacity: 0;
-        visibility: hidden;
-        transition: all var(--transition-medium);
-    }
-
-    .favorites-modal.show {
-        opacity: 1;
-        visibility: visible;
-    }
-
-    .modal-content {
-        background-color: var(--light-bg);
-        width: 90%;
-        max-width: 500px;
-        max-height: 80vh;
-        border-radius: var(--card-radius);
-        padding: 20px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-        transform: translateY(20px);
-        transition: all var(--transition-medium);
-    }
-
-    .favorites-modal.show .modal-content {
-        transform: translateY(0);
-    }
-
-    .modal-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 20px;
-        padding-bottom: 15px;
-        border-bottom: 1px solid #2a2a2a;
-    }
-
-    .modal-header h2 {
-        font-size: 22px;
-        color: var(--text-primary);
-    }
-
-    .close-modal {
-        background: none;
-        border: none;
-        color: var(--text-secondary);
-        font-size: 24px;
-        cursor: pointer;
-        transition: color var(--transition-fast);
-    }
-
-    .close-modal:hover {
-        color: var(--text-primary);
-    }
-
-    .favorites-list {
-        overflow-y: auto;
-        max-height: calc(80vh - 100px);
-    }
-
-    .favorite-item {
-        display: flex;
-        align-items: center;
-        padding: 12px 15px;
-        border-radius: var(--card-radius);
-        margin-bottom: 10px;
-        background-color: var(--dark-bg);
-        transition: all var(--transition-fast);
-    }
-
-    .favorite-item:hover {
-        background-color: #282828;
-    }
-
-    .favorite-item img {
-        width: 50px;
-        height: 50px;
-        border-radius: 4px;
-        object-fit: cover;
-        margin-right: 15px;
-    }
-
-    .favorite-info {
-        flex: 1;
-        min-width: 0;
-    }
-
-    .favorite-title {
-        font-weight: 500;
-        margin-bottom: 5px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-
-    .favorite-artist {
-        color: var(--text-secondary);
-        font-size: 14px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-
-    .remove-favorite {
-        background: none;
-        border: none;
-        color: var(--text-secondary);
-        font-size: 16px;
-        cursor: pointer;
-        margin-left: 15px;
-        transition: color var(--transition-fast);
-    }
-
-    .remove-favorite:hover {
-        color: #ff4d4d;
-    }
-
-    .empty-favorites {
-        text-align: center;
-        color: var(--text-secondary);
-        padding: 30px 0;
-    }
-
-    /* Mobile styles */
-    @media (max-width: 768px) {
         .favorites-btn {
-            margin-left: 10px;
-            width: 36px;
-            height: 36px;
-            font-size: 18px;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: var(--primary-color);
+            color: #000;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            z-index: 10;
+            transition: all var(--transition-fast);
+        }
+
+        .favorites-btn:hover {
+            background-color: var(--primary-light);
+            transform: scale(1.1);
+        }
+
+        .favorites-btn .badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #ff4d4d;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Favorites Modal */
+        .favorites-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all var(--transition-medium);
+        }
+
+        .favorites-modal.show {
+            opacity: 1;
+            visibility: visible;
         }
 
         .modal-content {
-            width: 95%;
-            padding: 15px;
+            background-color: var(--light-bg);
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
+            border-radius: var(--card-radius);
+            padding: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            transform: translateY(20px);
+            transition: all var(--transition-medium);
+        }
+
+        .favorites-modal.show .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #2a2a2a;
         }
 
         .modal-header h2 {
-            font-size: 20px;
+            font-size: 22px;
+            color: var(--text-primary);
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 24px;
+            cursor: pointer;
+            transition: color var(--transition-fast);
+        }
+
+        .close-modal:hover {
+            color: var(--text-primary);
+        }
+
+        .favorites-list {
+            overflow-y: auto;
+            max-height: calc(80vh - 100px);
         }
 
         .favorite-item {
-            padding: 10px 12px;
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            border-radius: var(--card-radius);
+            margin-bottom: 10px;
+            background-color: var(--dark-bg);
+            transition: all var(--transition-fast);
+            cursor: pointer;
+        }
+
+        .favorite-item:hover {
+            background-color: #282828;
         }
 
         .favorite-item img {
-            width: 40px;
-            height: 40px;
-            margin-right: 12px;
+            width: 50px;
+            height: 50px;
+            border-radius: 4px;
+            object-fit: cover;
+            margin-right: 15px;
         }
-    }
+
+        .favorite-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .favorite-title {
+            font-weight: 500;
+            margin-bottom: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .favorite-artist {
+            color: var(--text-secondary);
+            font-size: 14px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .remove-favorite {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 16px;
+            cursor: pointer;
+            margin-left: 15px;
+            transition: color var(--transition-fast);
+        }
+
+        .remove-favorite:hover {
+            color: #ff4d4d;
+        }
+
+        .empty-favorites {
+            text-align: center;
+            color: var(--text-secondary);
+            padding: 30px 0;
+        }
+
+        /* Mobile styles */
+        @media (max-width: 768px) {
+            .favorites-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+                top: 15px;
+                right: 15px;
+            }
+
+            .favorites-btn .badge {
+                width: 18px;
+                height: 18px;
+                font-size: 10px;
+            }
+
+            .modal-content {
+                width: 95%;
+                padding: 15px;
+            }
+
+            .modal-header h2 {
+                font-size: 20px;
+            }
+
+            .favorite-item {
+                padding: 10px 12px;
+            }
+
+            .favorite-item img {
+                width: 40px;
+                height: 40px;
+                margin-right: 12px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1010,10 +1032,11 @@
                 </div>
             </div>
         </div>
-        <button class="favorites-btn" id="favorites-btn" title="View Favorites">
-    <i class="fas fa-heart"></i>
-</button>
 
+        <button class="favorites-btn" id="favorites-btn" title="View Favorites">
+            <i class="fas fa-heart"></i>
+            <div class="badge" id="favorites-badge"></div>
+        </button>
 
         <header>
             <div class="logo">
@@ -1099,17 +1122,20 @@
             </div>
         </div>
     </div>
-<div class="favorites-modal" id="favorites-modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h2>Your Favorites</h2>
-            <button class="close-modal" id="close-modal">&times;</button>
-        </div>
-        <div class="favorites-list" id="favorites-list">
-            <!-- Favorites will be loaded here -->
+
+    <!-- Favorites Modal -->
+    <div class="favorites-modal" id="favorites-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Your Favorites</h2>
+                <button class="close-modal" id="close-modal">&times;</button>
+            </div>
+            <div class="favorites-list" id="favorites-list">
+                <!-- Favorites will be loaded here -->
+            </div>
         </div>
     </div>
-</div>
+
     <audio id="audio-player"></audio>
 
     <script>
@@ -1123,10 +1149,11 @@
                 dateAdded: "Jan 7, 2020",
                 duration: "3:20",
                 durationSec: 200,
-                cover: "millionare.png",
+                cover: "https://i1.sndcdn.com/artworks-I1VkGxl2ilhQzbZY-9VobTQ-t500x500.jpg",
                 audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
                 liked: false
             },
+            
             {
                 id: 2,
                 title: "QATAL",
@@ -1137,7 +1164,7 @@
                 durationSec: 215,
                 cover: "https://i.ytimg.com/vi/c-FKlE3_kHo/maxresdefault.jpg",
                 audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
-                liked: true
+                liked: false
             },
             {
                 id: 3,
@@ -1147,7 +1174,7 @@
                 dateAdded: "Nov 25, 2016",
                 duration: "3:50",
                 durationSec: 230,
-                cover: "janeman.png",
+                cover: "https://i.ytimg.com/vi/Q0xFN10WJGc/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDvU-Ztb-ZdHf5RmKjoMYpOYbm8XA",
                 audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
                 liked: false
             },
@@ -1171,9 +1198,9 @@
                 dateAdded: "Nov 1, 2019",
                 duration: "3:03",
                 durationSec: 183,
-                cover: "jattmakhma.png",
+                cover: "https://i.ytimg.com/vi/OCz1sADowRI/maxresdefault.jpg",
                 audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3",
-                liked: true
+                liked: false
             },
             {
                 id: 6,
@@ -1183,7 +1210,7 @@
                 dateAdded: "Nov 16, 2019",
                 duration: "2:54",
                 durationSec: 174,
-                cover: "bonita.png",
+                cover: "https://lyricloops.com/wp-content/uploads/2024/09/Bonita-Lyrics-Yo-Yo-Honey-Singh-600x338.jpg",
                 audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3",
                 liked: false
             },
@@ -1195,7 +1222,7 @@
                 dateAdded: "Aug 30, 2019",
                 duration: "3:35",
                 durationSec: 215,
-                cover: "krisna.png",
+                cover: "https://i.ytimg.com/vi/02OPySK0jsA/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAH31bznr9tzcN9HDJ1KxIGUFwKtg",
                 audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3",
                 liked: false
             },
@@ -1209,11 +1236,33 @@
                 durationSec: 158,
                 cover: "https://upload.wikimedia.org/wikipedia/en/4/4b/Post_Malone_%26_Swae_Lee_-_Sunflower.png",
                 audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3",
-                liked: true
-            },
-            
-        
+                liked: false
+            }
         ];
+
+        // Load favorites from localStorage
+        function loadFavoritesFromStorage() {
+            const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+            songs.forEach(song => {
+                song.liked = favorites.includes(song.id);
+            });
+            updateFavoritesBadge();
+        }
+
+        // Save favorites to localStorage
+        function saveFavoritesToStorage() {
+            const favorites = songs.filter(song => song.liked).map(song => song.id);
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            updateFavoritesBadge();
+        }
+
+        // Update favorites badge count
+        function updateFavoritesBadge() {
+            const favoriteCount = songs.filter(song => song.liked).length;
+            const badge = document.getElementById('favorites-badge');
+            badge.textContent = favoriteCount;
+            badge.style.display = favoriteCount > 0 ? 'flex' : 'none';
+        }
 
         // Calculate total duration
         const totalDuration = songs.reduce((sum, song) => sum + song.durationSec, 0);
@@ -1247,6 +1296,10 @@
         const toast = document.getElementById('toast');
         const toastMessage = document.getElementById('toast-message');
         const nowPlayingBar = document.getElementById('now-playing-bar');
+        const favoritesBtn = document.getElementById('favorites-btn');
+        const favoritesModal = document.getElementById('favorites-modal');
+        const closeModalBtn = document.getElementById('close-modal');
+        const favoritesList = document.getElementById('favorites-list');
 
         // Player state
         let currentSongIndex = 0;
@@ -1260,6 +1313,7 @@
 
         // Initialize
         function init() {
+            loadFavoritesFromStorage();
             loadSongs();
             updateStats();
             audioPlayer.volume = lastVolume;
@@ -1316,6 +1370,9 @@
                     if (song) {
                         song.liked = !song.liked;
                         this.classList.toggle('liked');
+                        
+                        // Save to localStorage
+                        saveFavoritesToStorage();
                         
                         // Show toast notification
                         showToast(song.liked ? 'Added to favorites' : 'Removed from favorites');
@@ -1632,6 +1689,82 @@
             }
         }
 
+        // Toggle favorites modal
+        function toggleFavoritesModal() {
+            favoritesModal.classList.toggle('show');
+            if (favoritesModal.classList.contains('show')) {
+                loadFavorites();
+            }
+        }
+
+        // Load favorites into the modal
+        function loadFavorites() {
+            const favoriteSongs = songs.filter(song => song.liked);
+            
+            if (favoriteSongs.length === 0) {
+                favoritesList.innerHTML = `
+                    <div class="empty-favorites">
+                        <i class="far fa-heart" style="font-size: 40px; margin-bottom: 15px;"></i>
+                        <p>No favorite songs yet</p>
+                    </div>
+                `;
+                return;
+            }
+
+            favoritesList.innerHTML = favoriteSongs.map(song => `
+                <div class="favorite-item" data-id="${song.id}">
+                    <img src="${song.cover || 'a.png'}" alt="${song.title}">
+                    <div class="favorite-info">
+                        <div class="favorite-title">${song.title}</div>
+                        <div class="favorite-artist">${song.artist}</div>
+                    </div>
+                    <button class="remove-favorite" title="Remove from favorites">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            `).join('');
+
+            // Add click event to play favorite song
+            document.querySelectorAll('.favorite-item').forEach(item => {
+                item.addEventListener('click', (e) => {
+                    // Don't trigger if clicking on remove button
+                    if (!e.target.classList.contains('fa-times') && !e.target.classList.contains('remove-favorite')) {
+                        const id = parseInt(item.getAttribute('data-id'));
+                        const index = songs.findIndex(song => song.id === id);
+                        if (index !== -1) {
+                            playSong(index);
+                            toggleFavoritesModal();
+                        }
+                    }
+                });
+            });
+
+            // Add click event to remove favorite
+            document.querySelectorAll('.remove-favorite').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const id = parseInt(this.closest('.favorite-item').getAttribute('data-id'));
+                    const song = songs.find(s => s.id === id);
+                    if (song) {
+                        song.liked = false;
+                        
+                        // Update the like button in main list
+                        const likeBtn = document.querySelector(`.like-btn[data-id="${id}"]`);
+                        if (likeBtn) {
+                            likeBtn.classList.remove('liked');
+                        }
+                        
+                        // Save to localStorage
+                        saveFavoritesToStorage();
+                        
+                        // Reload favorites
+                        loadFavorites();
+                        showToast('Removed from favorites');
+                    }
+                });
+            });
+        }
+
         // Event listeners
         playPauseBtn.addEventListener('click', togglePlayPause);
         nextBtn.addEventListener('click', playNextSong);
@@ -1640,6 +1773,15 @@
         repeatBtn.addEventListener('click', toggleRepeat);
         muteBtn.addEventListener('click', toggleMute);
         randomPlayBtn.addEventListener('click', playRandomSong);
+        favoritesBtn.addEventListener('click', toggleFavoritesModal);
+        closeModalBtn.addEventListener('click', toggleFavoritesModal);
+        
+        // Close modal when clicking outside
+        favoritesModal.addEventListener('click', (e) => {
+            if (e.target === favoritesModal) {
+                toggleFavoritesModal();
+            }
+        });
         
         audioPlayer.addEventListener('timeupdate', updateProgress);
         audioPlayer.addEventListener('ended', () => {
@@ -1725,96 +1867,5 @@
         // Initialize
         init();
     </script>
-    <script>
-    // DOM elements for favorites
-    const favoritesBtn = document.getElementById('favorites-btn');
-    const favoritesModal = document.getElementById('favorites-modal');
-    const closeModalBtn = document.getElementById('close-modal');
-    const favoritesList = document.getElementById('favorites-list');
-
-    // Toggle favorites modal
-    function toggleFavoritesModal() {
-        favoritesModal.classList.toggle('show');
-        if (favoritesModal.classList.contains('show')) {
-            loadFavorites();
-        }
-    }
-
-    // Load favorites into the modal
-    function loadFavorites() {
-        const favoriteSongs = songs.filter(song => song.liked);
-        
-        if (favoriteSongs.length === 0) {
-            favoritesList.innerHTML = `
-                <div class="empty-favorites">
-                    <i class="far fa-heart" style="font-size: 40px; margin-bottom: 15px;"></i>
-                    <p>No favorite songs yet</p>
-                </div>
-            `;
-            return;
-        }
-
-        favoritesList.innerHTML = favoriteSongs.map(song => `
-            <div class="favorite-item" data-id="${song.id}">
-                <img src="${song.cover || 'a.png'}" alt="${song.title}">
-                <div class="favorite-info">
-                    <div class="favorite-title">${song.title}</div>
-                    <div class="favorite-artist">${song.artist}</div>
-                </div>
-                <button class="remove-favorite" title="Remove from favorites">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-        `).join('');
-
-        // Add click event to play favorite song
-        document.querySelectorAll('.favorite-item').forEach(item => {
-            item.addEventListener('click', (e) => {
-                // Don't trigger if clicking on remove button
-                if (!e.target.classList.contains('fa-times') && !e.target.classList.contains('remove-favorite')) {
-                    const id = parseInt(item.getAttribute('data-id'));
-                    const index = songs.findIndex(song => song.id === id);
-                    if (index !== -1) {
-                        playSong(index);
-                        toggleFavoritesModal();
-                    }
-                }
-            });
-        });
-
-        // Add click event to remove favorite
-        document.querySelectorAll('.remove-favorite').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                const id = parseInt(this.closest('.favorite-item').getAttribute('data-id'));
-                const song = songs.find(s => s.id === id);
-                if (song) {
-                    song.liked = false;
-                    
-                    // Update the like button in main list
-                    const likeBtn = document.querySelector(`.like-btn[data-id="${id}"]`);
-                    if (likeBtn) {
-                        likeBtn.classList.remove('liked');
-                    }
-                    
-                    // Reload favorites
-                    loadFavorites();
-                    showToast('Removed from favorites');
-                }
-            });
-        });
-    }
-
-    // Event listeners for favorites
-    favoritesBtn.addEventListener('click', toggleFavoritesModal);
-    closeModalBtn.addEventListener('click', toggleFavoritesModal);
-
-    // Close modal when clicking outside
-    favoritesModal.addEventListener('click', (e) => {
-        if (e.target === favoritesModal) {
-            toggleFavoritesModal();
-        }
-    });
-</script>
 </body>
 </html>
